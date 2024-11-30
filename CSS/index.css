@@ -1,0 +1,35 @@
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.navbar {
+    background-color: white; /* Fondo blanco */
+    font-size: 16px;
+}
+
+.navbar-nav .nav-link {
+    color: black; /* Texto negro */
+    font-weight: 500;
+}
+
+.navbar-nav .nav-link:hover {
+    color: black; /* Mantiene el color negro */
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block; /* Muestra el menú desplegable al pasar el cursor */
+}
+
+.dropdown-menu {
+    border: none;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+
+.dropdown-menu a {
+    color: black; /* Color de los elementos del dropdown */
+}
+
+.dropdown-menu a:hover {
+    background-color: #f5f5f7; /* Gris claro */
+    color: black; /* Mantiene el color negro */
+}
