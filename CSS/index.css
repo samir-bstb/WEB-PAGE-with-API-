@@ -3,33 +3,34 @@ body {
 }
 
 .navbar {
-    background-color: white; /* Fondo blanco */
+    background-color: rgb(239, 238, 238);
     font-size: 16px;
 }
 
 .navbar-nav .nav-link {
-    color: black; /* Texto negro */
+    color: black;
     font-weight: 500;
+    margin: 0 20px;
 }
 
 .navbar-nav .nav-link:hover {
-    color: black; /* Mantiene el color negro */
+    color: black;
 }
 
 .nav-item.dropdown:hover .dropdown-menu {
-    display: block; /* Muestra el menú desplegable al pasar el cursor */
+    display: block;
 }
 
 .dropdown-menu {
     border: none;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .dropdown-menu a {
-    color: black; /* Color de los elementos del dropdown */
+    color: black;
 }
 
 .dropdown-menu a:hover {
-    background-color: #f5f5f7; /* Gris claro */
-    color: black; /* Mantiene el color negro */
+    background-color: rgb(239, 238, 238);
+    color: black;
 }
