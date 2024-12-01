@@ -80,10 +80,47 @@
 		fetch('../navbar.html')
 			.then(response => response.text())
 			.then(html => {
+				// Insertar el HTML del navbar
 				document.getElementById('navbar-container').innerHTML = html;
+	
+				// Re-inicializar los eventos del navbar
+				const overlay = document.getElementById('overlay'); // Fondo oscuro
+	
+				function showMenu(infoElement) {
+					closeAllMenus();
+					infoElement.classList.add('visible');
+					overlay.style.display = 'block';
+				}
+	
+				function hideMenu(infoElement) {
+					infoElement.classList.remove('visible');
+					if (!document.querySelector('.menu-info.visible')) {
+						overlay.style.display = 'none';
+					}
+				}
+	
+				function closeAllMenus() {
+					const allMenus = document.querySelectorAll('.menu-info');
+					allMenus.forEach(menu => menu.classList.remove('visible'));
+					overlay.style.display = 'none';
+				}
+	
+				function setupLink(linkId, infoId) {
+					const link = document.getElementById(linkId);
+					const info = document.getElementById(infoId);
+					if (link && info) {
+						link.addEventListener('mouseenter', () => showMenu(info));
+						info.addEventListener('mouseleave', () => hideMenu(info));
+					}
+				}
+	
+				setupLink('store-link', 'store-info');
+				setupLink('mac-link', 'mac-info');
+				setupLink('ipad-link', 'ipad-info');
+				setupLink('iphone-link', 'iphone-info');
 			})
 			.catch(error => console.error('Error al cargar el navbar:', error));
-	</script>
+	</script>	
 
 	<!-- Swiper -->
 	<div class="container swiper">
@@ -180,7 +217,6 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 	<script src="../JS/swiper.js"></script>
-	<script src="../JS/index.js"></script>
 
 	<footer align="center">
 		<p>Designed by Apple in California<br><br>
