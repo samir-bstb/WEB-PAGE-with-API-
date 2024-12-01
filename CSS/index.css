@@ -303,6 +303,7 @@ body {
     text-align: center;
     color: white;
     font-family: Arial, sans-serif;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.12);
 }
 
 .card-item2 .a-title{
@@ -426,4 +427,9 @@ body {
     width: 60px;
     height: 60px;
     opacity: 1;
+}
+.card-item2:hover {
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3); /* Sombra al pasar el mouse */
+    transform: scale(1.02); /* (Opcional) Un ligero aumento de tamaño */
+    transition: box-shadow 0.6s ease, transform 0.6s ease;
 }
