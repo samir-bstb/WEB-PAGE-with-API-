@@ -3,12 +3,8 @@ body {
     margin: 0;
 }
 
-.navbar {
-    margin-top: 0;
-    padding-top: 0;
-    background-color: rgb(239, 238, 238);
-    font-size: 16px;
-    position: static;
+.navbar {  
+    position: relative;
 }
 
 .navbar-nav .nav-link {
@@ -26,8 +22,13 @@ body {
 }
 
 .dropdown-menu {
-    border: none;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    position: absolute; /* Posiciona el menú fuera del flujo normal */
+    top: 100%; /* Coloca el menú justo debajo del contenedor padre */
+    left: 0; /* Alinea el menú al borde izquierdo */
+    width: 100%; /* Asegura que cubra toda la anchura */
+    border: none; /* Elimina el borde si no es necesario */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra opcional */
+    z-index: 1050;
 }
 
 .dropdown-menu a {
@@ -87,4 +88,27 @@ body {
 /* Cuando el cursor está sobre el navbar, el contenido principal se desenfoca */
 .navbar:hover ~ .main-content {
     filter: blur(5px); /* Ajusta la cantidad de desenfoque */
+}
+
+.dropdown-menu.full-width {
+    position: relative;
+    top: 100%;
+    left: 0;
+    width: 100vw; /* Extiende el menú a todo el ancho */
+    background-color: white; /* Fondo blanco como en el ejemplo */
+    border: none; /* Sin bordes */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombras suaves */
+    z-index: 1050;
+    padding: 10px 0; /* Espaciado interno */
+}
+
+/* Cambiar el estilo de las opciones del menú */
+.dropdown-menu.full-width .dropdown-item {
+    padding: 10px 20px; /* Ajusta el espaciado interno */
+    font-size: 14px;
+}
+
+/* Mostrar el menú al pasar el mouse */
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
 }
