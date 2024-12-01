@@ -4,9 +4,37 @@ body {
 }
 
 .navbar {
-    background-color: rgb(239, 238, 238);
+    background-color: rgb(255, 255, 255);
     font-size: 16px;
     position: static;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.navbar-toggler {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.navbar-brand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar-logo {
+    width: 18px;
+    height: auto;
+    display: block;
+    margin-bottom: 2px;
 }
 
 .navbar-nav .nav-link {
@@ -16,7 +44,7 @@ body {
 }
 
 .navbar-nav .nav-link:hover {
-    color: black;
+    color: rgb(0, 0, 0);
 }
 
 .nav-item.dropdown:hover .dropdown-menu {
@@ -24,8 +52,19 @@ body {
 }
 
 .dropdown-menu {
-    border: none;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    display: none;
+    width: 100%;
+    box-sizing: border-box;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Estilo para mostrar el dropdown */
+.dropdown-menu.show {
+    display: block;
+    opacity: 1;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .dropdown-menu a {
@@ -36,6 +75,11 @@ body {
     background-color: rgb(239, 238, 238);
     color: black;
 }
+
+.navbar .dropdown-toggle::after {
+    display: none;
+}
+
 
 #search{
     margin: 0 35px;
