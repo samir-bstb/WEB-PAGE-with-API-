@@ -116,6 +116,7 @@ body {
 .text-overlay span {
     font-weight: bold;
     background: linear-gradient(90deg, rgb(62, 118, 240), rgb(132, 95, 232),  rgb(215, 148, 224), rgb(233, 148, 173), rgb(254, 118, 140));
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: none;
