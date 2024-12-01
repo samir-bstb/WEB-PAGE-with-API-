@@ -157,6 +157,13 @@ body {
     text-shadow: none;
 }
 
+.normal-link {
+    color: inherit; /* Usa el color del texto circundante */
+    text-decoration: none; /* Quita el subrayado */
+    font-weight: 500;
+    font-size: 36px;
+}
+
 /*slider css*/
 .card-list .card-item{
     list-style: none; 
