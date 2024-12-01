@@ -97,23 +97,25 @@ body {
 }
 
 #store-info, #mac-info, #ipad-info, #iphone-info {
-    display: none; /* Oculto inicialmente */
-    position: fixed; /* Fijado en la pantalla */
-    height: 200px;
+    display: none;
+    position: fixed;
+    height: 0; /* Altura inicial */
     top: 50px;
     left: 0;
-    width: 100%; /* Abarca todo el ancho */
-    z-index: 1000; /* Por encima del resto del contenido */
+    width: 100%;
+    z-index: 1000;
     background-color: white;
     padding: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    opacity: 0; /* Totalmente transparente */
-    animation: fadeIn 1s;
+    opacity: 0;
+    overflow: hidden; /* Oculta el contenido fuera del contenedor */
+    transition: height 5s ease, opacity 5s ease;
 }
 
 #store-info.visible, #mac-info.visible, #ipad-info.visible, #iphone-info.visible {
-    display: block; /* Mostrar el elemento */
-    opacity: 1; /* Totalmente visible */
+    display: block;
+    height: 350px; /* Altura máxima al desplegar */
+    opacity: 1;
 }
 
 #search {
@@ -134,6 +136,18 @@ body {
 .image-container img {
     width: 100%; /* La imagen ocupa todo el contenedor */
     height: auto;
+}
+
+.image-container2 {
+    position: relative;
+    width: 100%; /* Ajusta al tamaño de la imagen o el contenedor */
+    height: 75px;
+    margin-bottom: 20px;
+}
+
+.image-container2 img {
+    width: 100%; /* La imagen ocupa todo el contenedor */
+    height: 50px;
 }
 
 .text-overlay {
@@ -161,8 +175,42 @@ body {
     color: inherit; /* Usa el color del texto circundante */
     text-decoration: none; /* Quita el subrayado */
     font-weight: 500;
-    font-size: 36px;
+    font-size: 30px;
 }
+
+.no-bullets {
+    list-style-type: none; /* Elimina las viñetas */
+    padding: 0;           /* Opcional: elimina el relleno predeterminado del <ul> */
+    margin-left: 70px;           /* Opcional: elimina el margen predeterminado del <ul> */
+}
+
+.tiny_titles{
+    font-size: 15px;
+    color:lightgray;
+    padding: 0;           
+    margin-left: 70px; 
+    margin-top: 30px; 
+}
+
+
+.subtitle {
+    position: absolute;
+    margin-left: 100px;
+    color: rgb(168, 167, 167); /* Color del texto */
+    font-size: 30px; /* Tamaño del texto *//* Sombra para mejorar la visibilidad */
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    white-space: nowrap;
+}
+
+.subtitle span {
+    font-weight: bold;
+    background: linear-gradient(90deg, rgb(62, 118, 240), rgb(132, 95, 232),  rgb(215, 148, 224), rgb(233, 148, 173), rgb(254, 118, 140));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: none;
+}
+
 
 /*slider css*/
 .card-list .card-item{
@@ -194,6 +242,144 @@ body {
 }
 
 .card-wrapper{
+    max-width: 1100px;
+    margin: 0 60px 35px;
+    padding: 20px 10px;
+    overflow: hidden;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: white; /* Color inicial de la flecha */
+    font-size: 20px; /* Tamaño de la flecha */
+    transition: color 0.3s; /* Animación suave al cambiar el color */
+    font-weight: bold;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    color: black; /* Cambia el color de la flecha al pasar el mouse */
+}
+
+/* Opcionalmente, personaliza el pseudo-elemento ::after */
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-size: inherit; /* Asegúrate de que use el tamaño definido en el contenedor */
+}
+
+.swiper-button-prev::before,
+.swiper-button-next::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    z-index: 1;
+    transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+}
+
+.swiper-button-next:hover::before,
+.swiper-button-prev:hover::before {
+    width: 60px;
+    height: 60px;
+    opacity: 1;
+}
+
+/*Second slider*/
+.card-item2 {
+    position: relative;
+    width: 300px; /* Ajusta al tamaño deseado */
+    height: 400px; /* Ajusta al tamaño deseado */
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.card-item2 .a-title{
+    text-decoration: none;
+    color: inherit;
+    text-align: left;
+    position: absolute; /* Permite posicionar el texto relativo a la tarjeta */
+    top: 10px; /* Ajusta la distancia desde la parte superior */
+    left: 10px; /* Ajusta la distancia desde el borde izquierdo */
+    margin: 0; /* Asegúrate de que no haya márgenes adicionales */
+    font-size: 22px;
+    color: black;
+    font-weight: bold;
+}
+
+.card-item2 .a-subtitle{
+    text-decoration: none;
+    color: inherit;
+    text-align: left;
+    position: absolute; /* Permite posicionar el texto relativo a la tarjeta */
+    top: 10px; /* Ajusta la distancia desde la parte superior */
+    left: 10px; /* Ajusta la distancia desde el borde izquierdo */
+    margin-top: 40px; /* Asegúrate de que no haya márgenes adicionales */
+    font-size: 18px;
+    color: black;
+}
+
+/* Agrega imágenes de fondo específicas */
+.card-item2.iphone {
+    background-image: url('https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/store-card-50-holiday-iphone-pro-202411_GEO_US?wid=960&hei=1000&fmt=p-jpg&qlt=95&.v=1729180965302');
+    background-size: cover;
+    background-position: center;
+    margin-right: 10px;
+}
+
+.card-item2.ipad {
+    background-image: url('https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/store-card-50-holiday-watch-s10-202411?wid=960&hei=1000&fmt=p-jpg&qlt=95&.v=1729694064591');
+    background-size: cover;
+    background-position: center;
+}
+
+.card-item2.watch {
+    background-image: url('https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/store-card-50-holiday-ipad-mini-202411?wid=960&hei=1000&fmt=p-jpg&qlt=95&.v=1728504973912');
+    background-size: cover;
+    background-position: center;
+}
+
+.card-item2.vision-pro {
+    background-image: url('https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/store-card-50-holiday-macbook-pro-202411?wid=960&hei=1000&fmt=p-jpg&qlt=95&.v=1728492746398');
+    background-size: cover;
+    background-position: center;
+}
+
+.card-item2.airpods {
+    background-image: url('https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/store-card-50-holiday-vision-pro-202411?wid=960&hei=1000&fmt=p-jpg&qlt=95&.v=1728499365473');
+    background-size: cover;
+    background-position: center;
+}
+
+.card-item2.mac {
+    background-image: url('https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/store-card-50-holiday-mac-mini-202411?wid=960&hei=1000&fmt=p-jpg&qlt=95&.v=1728499365448');
+    background-size: cover;
+    background-position: center;
+}
+
+.card-list2 .card-item2{
+    list-style: none; 
+}
+
+.card-list2 .card-link2 .card-title2{
+    font-weight: 650;
+    font-size: 1.2rem;
+    color: black;
+    margin: 16px 0 18px;
+}
+
+.card-wrapper2{
     max-width: 1100px;
     margin: 0 60px 35px;
     padding: 20px 10px;

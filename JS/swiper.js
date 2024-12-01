@@ -2,7 +2,8 @@ new Swiper('.card-wrapper', {
 
     loop: true,
     spaceBetween: 10,
-    slidesPerView: 3,
+    slidesPerView: 3,    
+    loopAdditionalSlides: 1,
 
     // Navigation arrows
     navigation: {
