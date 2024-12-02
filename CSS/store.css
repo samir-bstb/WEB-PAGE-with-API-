@@ -63,27 +63,6 @@
     text-shadow: none;
 }
 /*Primer slider*/
-.card-list .card-item{
-    list-style: none; 
-
-}
-.card-list .card-item .card-link{
-    user-select: none;
-    display: block;
-    background-color: white;
-    padding: 18px;
-    text-decoration: none;
-    height: 100%;
-}
-
-.card-list .card-link .card-img{
-    width: 100%;
-    height: 180px;
-    aspect-ratio: 16/9; 
-    object-fit: cover;
-    border-radius: 10px;   
-}
-
 .card-title{
     text-decoration: none;
     font-size: 0.8rem;
@@ -98,48 +77,6 @@
     margin: 0 60px 35px;
     padding: 20px 10px;
     overflow: hidden;
-}
-
-.swiper-button-next,
-.swiper-button-prev {
-    color: white; /* Color inicial de la flecha */
-    font-size: 20px; /* Tamaño de la flecha */
-    transition: color 0.1s; /* Animación suave al cambiar el color */
-    font-weight: bold;
-}
-
-.swiper-button-next:hover,
-.swiper-button-prev:hover {
-    color: black; /* Cambia el color de la flecha al pasar el mouse */
-}
-
-/* Opcionalmente, personaliza el pseudo-elemento ::after */
-.swiper-button-next::after,
-.swiper-button-prev::after {
-    font-size: inherit; /* Asegúrate de que use el tamaño definido en el contenedor */
-}
-
-.swiper-button-prev::before,
-.swiper-button-next::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 0;
-    height: 0;
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 50%;
-    z-index: 1;
-    transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
-    opacity: 0;
-}
-
-.swiper-button-next:hover::before,
-.swiper-button-prev:hover::before {
-    width: 60px;
-    height: 60px;
-    opacity: 1;
 }
 
 /*Second slider*/
