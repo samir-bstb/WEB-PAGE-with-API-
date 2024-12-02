@@ -96,7 +96,7 @@ body {
     z-index: 500; /* Fondo oscuro debajo de la navbar */
 }
 
-#store-info, #mac-info, #ipad-info, #iphone-info {
+#store-info, #mac-info, #ipad-info, #iphone-info, #support-info {
     display: none;
     position: fixed;
     height: 0; /* Altura inicial */
@@ -112,7 +112,7 @@ body {
     transition: height 5s ease, opacity 5s ease;
 }
 
-#store-info.visible, #mac-info.visible, #ipad-info.visible, #iphone-info.visible {
+#store-info.visible, #mac-info.visible, #ipad-info.visible, #iphone-info.visible, #support-info.visible {
     display: block;
     height: 350px; /* Altura máxima al desplegar */
     opacity: 1;
