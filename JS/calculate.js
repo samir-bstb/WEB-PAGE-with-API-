@@ -1,73 +1,133 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const modal = document.getElementById('modal');
-    const closeModal = document.getElementById('close-modal');
-    const cancelBtn = document.getElementById('cancel-btn');
+    const cartModal = document.getElementById('cart-modal');
+    const closeCartModal = document.getElementById('close-cart-modal');
+    const confirmCartBtn = document.getElementById('confirm-cart-btn');
+    const cancelCartBtn = document.getElementById('cancel-cart-btn');
+    const cartDetails = document.getElementById('cart-details');
+    const cartAmountDiv = document.querySelector('.cartAmount');
+    const shoppingIcon = document.getElementById('shopping');
+
+    const quantityModal = document.getElementById('modal');
+    const closeQuantityModal = document.getElementById('close-modal');
+    const confirmQuantityBtn = document.getElementById('confirm-btn');
+    const cancelQuantityBtn = document.getElementById('cancel-btn');
     const quantityInput = document.getElementById('quantity');
     const totalPriceSpan = document.getElementById('total-price');
-    const confirmBtn = document.getElementById('confirm-btn');
-    let pricePerUnit = 999; // Default price per unit
 
-    let scrollPosition = 0; // Variable to store the current scroll position
+    let selectedProduct = null;
 
-    // Show the modal when any "Buy" button is clicked
+    // Load cart amount from localStorage
+    const savedCartAmount = localStorage.getItem('cartAmount');
+    if (savedCartAmount) {
+        cartAmountDiv.textContent = savedCartAmount;
+    }
+
+    // Show cart modal when shopping bag icon is clicked
+    shoppingIcon.addEventListener('click', (event) => {
+        event.preventDefault(); // Prevent default action
+        const products = JSON.parse(localStorage.getItem('cartProducts')) || [];
+        cartDetails.innerHTML = products.map(product => `
+            <div class="cart-item">
+                <p>Name: ${product.name}</p>
+                <p>Price: $${product.price}</p>
+                <p>Quantity: ${product.quantity}</p>
+                <p>Category: ${product.category}</p>
+            </div>
+        `).join('');
+        cartModal.style.display = 'block';
+    });
+
+    // Close cart modal
+    closeCartModal.addEventListener('click', () => {
+        cartModal.style.display = 'none';
+    });
+
+    // Confirm purchase
+    confirmCartBtn.addEventListener('click', () => {
+        const products = JSON.parse(localStorage.getItem('cartProducts')) || [];
+        const jsonData = JSON.stringify(products, null, 2);
+        const blob = new Blob([jsonData], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+
+        // Create a link to download the JSON file
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "purchase.json";
+        link.click();
+
+        // Clear cart
+        localStorage.removeItem('cartProducts');
+        localStorage.removeItem('cartAmount');
+        cartAmountDiv.textContent = '0';
+        cartModal.style.display = 'none';
+    });
+
+    // Cancel purchase
+    cancelCartBtn.addEventListener('click', () => {
+        localStorage.removeItem('cartProducts');
+        localStorage.removeItem('cartAmount');
+        cartAmountDiv.textContent = '0';
+        cartModal.style.display = 'none';
+    });
+
+    // Function to update cart amount in localStorage
+    function updateCartAmount(amount) {
+        localStorage.setItem('cartAmount', amount);
+        cartAmountDiv.textContent = amount;
+    }
+
+    // Function to add product to cart
+    function addProductToCart(product) {
+        const products = JSON.parse(localStorage.getItem('cartProducts')) || [];
+        products.push(product);
+        localStorage.setItem('cartProducts', JSON.stringify(products));
+    }
+
+    // Show quantity modal when buy button is clicked
     document.querySelectorAll('.buy-btn').forEach(button => {
         button.addEventListener('click', (event) => {
-            scrollPosition = window.scrollY; // Save the current scroll position
-            document.body.style.top = `-${scrollPosition}px`; // Adjust the body's position
-            document.body.classList.add('no-scroll'); // Disable scrolling
-
-            // Get the price from the card
+            event.preventDefault(); // Prevent default action
             const cardFooter = event.target.closest('.card-footer');
             const priceText = cardFooter.querySelector('.card-title').textContent;
-            pricePerUnit = parseFloat(priceText.match(/\$([0-9.]+)/)[1]);
+            const price = parseFloat(priceText.match(/\$([0-9.]+)/)[1]);
+            const card = event.target.closest('.card-item2');
+            const name = card.querySelector('.a-title').textContent.trim();
+            const category = card.getAttribute('data-category');
+            const description = card.getAttribute('data-description');
 
-            // Set the default quantity to 0
-            quantityInput.value = 0;
-
-            // Update the total price in the modal
-            const quantity = parseInt(quantityInput.value) || 0;
-            const totalPrice = quantity * pricePerUnit;
-            totalPriceSpan.textContent = totalPrice;
-
-            // Disable all "Buy" buttons
-            document.querySelectorAll('.buy-btn').forEach(btn => btn.disabled = true);
-
-            modal.style.display = 'block';
+            selectedProduct = { name, price, category, description };
+            quantityInput.value = 1; // Reset quantity to 1
+            totalPriceSpan.textContent = price.toFixed(2); // Set initial total price
+            quantityModal.style.display = 'block';
         });
     });
 
-    // Close the modal when "x" or "Cancel" is clicked
-    closeModal.addEventListener('click', closeAndRestoreScroll);
-    cancelBtn.addEventListener('click', closeAndRestoreScroll);
-
-    // Confirm the purchase
-    confirmBtn.addEventListener('click', () => {
-        alert(`You have confirmed the purchase of ${quantityInput.value} item(s) for $${totalPriceSpan.textContent}`);
-        closeAndRestoreScroll();
+    // Close quantity modal
+    closeQuantityModal.addEventListener('click', () => {
+        quantityModal.style.display = 'none';
     });
 
-    // Update the total price when the quantity changes
+    // Update total price when quantity changes
     quantityInput.addEventListener('input', () => {
-        const quantity = parseInt(quantityInput.value) || 0;
-        const totalPrice = quantity * pricePerUnit;
-        totalPriceSpan.textContent = totalPrice;
+        const quantity = parseInt(quantityInput.value) || 1;
+        const totalPrice = selectedProduct.price * quantity;
+        totalPriceSpan.textContent = totalPrice.toFixed(2);
     });
 
-    // Close the modal if clicking outside the content
-    window.addEventListener('click', (event) => {
-        if (event.target === modal) {
-            closeAndRestoreScroll();
-        }
+    // Confirm quantity
+    confirmQuantityBtn.addEventListener('click', () => {
+        const quantity = parseInt(quantityInput.value) || 1;
+        const product = { ...selectedProduct, quantity };
+        addProductToCart(product);
+
+        const currentCartAmount = parseInt(cartAmountDiv.textContent) || 0;
+        updateCartAmount(currentCartAmount + quantity);
+
+        quantityModal.style.display = 'none';
     });
 
-    // Function to close the modal and restore scrolling
-    function closeAndRestoreScroll() {
-        modal.style.display = 'none';
-        document.body.classList.remove('no-scroll'); // Enable scrolling
-        document.body.style.top = ''; // Remove the position adjustment
-        window.scrollTo(0, scrollPosition); // Restore the scroll position
-
-        // Re-enable all "Buy" buttons
-        document.querySelectorAll('.buy-btn').forEach(btn => btn.disabled = false);
-    }
+    // Cancel quantity
+    cancelQuantityBtn.addEventListener('click', () => {
+        quantityModal.style.display = 'none';
+    });
 });
