@@ -27,6 +27,7 @@
 
 	<div id="overlay" class="overlay"></div>
 
+	<!-- Contenido del store-info -->
 	<div id="store-info" class="menu-info">
 		<p class="tiny_titles">Shop</p>
 		<ul class="no-bullets">
@@ -35,9 +36,8 @@
 			<li><a href="https://example.com" class="normal-link">iPhone</a></li>
 			<li><a href="https://example.com" class="normal-link">Watch</a></li>
 		</ul>
-		
-		<!-- Contenido del store-info -->
 	</div>
+
 	<div id="mac-info" class="menu-info">
 		<p class="tiny_titles">Explore Mac</p>
 		<ul class="no-bullets">
@@ -82,29 +82,38 @@
 			.then(html => {
 				// Insertar el HTML del navbar
 				document.getElementById('navbar-container').innerHTML = html;
-	
-				// Re-inicializar los eventos del navbar
+
+				// Re-inicializar Bootstrap para la navbar
+				const navbar = document.querySelector('#navbarNavDropdown');
+				if (navbar) {
+					const dropdowns = navbar.querySelectorAll('.dropdown-toggle');
+					dropdowns.forEach(dropdown => {
+						new bootstrap.Dropdown(dropdown); // Re-inicializar dropdowns
+					});
+				}
+
+				// Re-inicializar eventos personalizados si los tienes
 				const overlay = document.getElementById('overlay'); // Fondo oscuro
-	
+
 				function showMenu(infoElement) {
 					closeAllMenus();
 					infoElement.classList.add('visible');
 					overlay.style.display = 'block';
 				}
-	
+
 				function hideMenu(infoElement) {
 					infoElement.classList.remove('visible');
 					if (!document.querySelector('.menu-info.visible')) {
 						overlay.style.display = 'none';
 					}
 				}
-	
+
 				function closeAllMenus() {
 					const allMenus = document.querySelectorAll('.menu-info');
 					allMenus.forEach(menu => menu.classList.remove('visible'));
 					overlay.style.display = 'none';
 				}
-	
+
 				function setupLink(linkId, infoId) {
 					const link = document.getElementById(linkId);
 					const info = document.getElementById(infoId);
@@ -113,14 +122,14 @@
 						info.addEventListener('mouseleave', () => hideMenu(info));
 					}
 				}
-	
 				setupLink('store-link', 'store-info');
 				setupLink('mac-link', 'mac-info');
 				setupLink('ipad-link', 'ipad-info');
 				setupLink('iphone-link', 'iphone-info');
 			})
 			.catch(error => console.error('Error al cargar el navbar:', error));
-	</script>	
+
+	</script>
 
 	<!-- Swiper -->
 	<div class="container swiper">
@@ -183,27 +192,27 @@
 			<ul class="card-list2 swiper-wrapper">
 				<li class="card-item2 swiper-slide iphone">
 					<a class="a-title"> iPhone 16 Pro </a>
-					<a class="a-subtitle"> From $999  or $41.62/mo. for 24 mo. </a>
+					<a class="a-subtitle"> From $999 or $41.62/mo. for 24 mo. </a>
 				</li>
 				<li class="card-item2 swiper-slide ipad">
 					<a class="a-title"> Apple Watch Series 10 </a>
-					<a class="a-subtitle"> From $399  or $33.25/mo. for 12 mo. </a>
+					<a class="a-subtitle"> From $399 or $33.25/mo. for 12 mo. </a>
 				</li>
 				<li class="card-item2 swiper-slide watch">
 					<a class="a-title"> iPad mini </a>
-					<a class="a-subtitle"> From $499  or $41.58/mo. for 12 mo. </a>
+					<a class="a-subtitle"> From $499 or $41.58/mo. for 12 mo. </a>
 				</li>
 				<li class="card-item2 swiper-slide vision-pro">
 					<a class="a-title"> MacBookPro </a>
-					<a class="a-subtitle"> From $1599  or $133.25/mo. for 12 mo. </a>
+					<a class="a-subtitle"> From $1599 or $133.25/mo. for 12 mo. </a>
 				</li>
 				<li class="card-item2 swiper-slide airpods">
 					<a class="a-title"> Apple Vision Pro </a>
-					<a class="a-subtitle"> From $3499  or $291.58/mo. for 12 mo. </a>
+					<a class="a-subtitle"> From $3499 or $291.58/mo. for 12 mo. </a>
 				</li>
 				<li class="card-item2 swiper-slide mac">
 					<a class="a-title"> Mac mini </a>
-					<a class="a-subtitle"> From $599  or $49.91/mo. for 12 mo. </a>
+					<a class="a-subtitle"> From $599 or $49.91/mo. for 12 mo. </a>
 				</li>
 			</ul>
 
