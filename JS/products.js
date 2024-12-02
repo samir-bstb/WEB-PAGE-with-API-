@@ -5,10 +5,10 @@ const iphones = [];
 
 // Recorremos cada tarjeta para extraer la información
 iphoneCards.forEach(card => {
-    const name = card.querySelector(".a-title").textContent.trim() + card.querySelector(".a-subtitle").textContent.trim();
+    const name = card.querySelector(".a-title").textContent.trim();
     const priceMatch = card.querySelector(".card-title").textContent.trim().match(/From \$(\d+)/);
     const price = priceMatch ? parseFloat(priceMatch[1]) : null; // Validar precio
-    const category = card.classList[1]; // Tomamos la segunda clase como categoría (e.g., iphone16pro)
+    const category = card.getAttribute("data-category"); // Obtenemos la categoría del atributo data-category
     const description = card.getAttribute("data-description"); // Obtenemos la descripción del atributo data-description
 
     // Agregamos el objeto al array
