@@ -6,8 +6,10 @@
 }
 
 .image-container img {
-    width: 100%; /* La imagen ocupa todo el contenedor */
-    height: auto;
+    position: relative;
+    width: 150%; /* Tamaño deseado de la imagen */
+    left: 50%; /* Mueve la imagen al centro del contenedor */
+    transform: translateX(-50%);
 }
 
 .image-container2 {
@@ -24,7 +26,7 @@
 
 .text-overlay {
     position: absolute;
-    top: 50%; /* Centra el texto verticalmente */
+    top: 15%; /* Centra el texto verticalmente */
     left: 50%; /* Centra el texto horizontalmente */
     transform: translate(-50%, -50%); /* Ajusta la posición para centrar el texto */
     color: rgb(168, 167, 167); /* Color del texto */
@@ -175,8 +177,9 @@
     top: 10px; /* Ajusta la distancia desde la parte superior */
     left: 10px; /* Ajusta la distancia desde el borde izquierdo */
     margin-top: 40px; /* Asegúrate de que no haya márgenes adicionales */
-    font-size: 18px;
+    font-size: 22px;
     color: black;
+    font-weight: bold;
 }
 
 .card-item2.iphone {
