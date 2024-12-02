@@ -7,7 +7,7 @@
 
 .image-container img {
     position: relative;
-    width: 150%; /* Tamaño deseado de la imagen */
+    width: 100%; /* Tamaño deseado de la imagen */
     left: 50%; /* Mueve la imagen al centro del contenedor */
     transform: translateX(-50%);
 }
@@ -26,7 +26,7 @@
 
 .text-overlay {
     position: absolute;
-    top: 15%; /* Centra el texto verticalmente */
+    top: 20%; /* Centra el texto verticalmente */
     left: 50%; /* Centra el texto horizontalmente */
     transform: translate(-50%, -50%); /* Ajusta la posición para centrar el texto */
     color: rgb(168, 167, 167); /* Color del texto */
@@ -104,7 +104,7 @@
 .swiper-button-prev {
     color: white; /* Color inicial de la flecha */
     font-size: 20px; /* Tamaño de la flecha */
-    transition: color 0.3s; /* Animación suave al cambiar el color */
+    transition: color 0.1s; /* Animación suave al cambiar el color */
     font-weight: bold;
 }
 
@@ -145,8 +145,8 @@
 /*Second slider*/
 .card-item2 {
     position: relative;
-    width: 300px; /* Ajusta al tamaño deseado */
-    height: 400px; /* Ajusta al tamaño deseado */
+    width: 350px; /* Ajusta al tamaño deseado */
+    height: 450px; /* Ajusta al tamaño deseado */
     border-radius: 10px;
     overflow: hidden;
     display: flex;

@@ -70,7 +70,7 @@
 	</div>
 
 	<div class="image-container">
-		<img src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/ase-header-hero-offer-lastchance-202411?wid=5394&hei=1528&fmt=png-alpha&.v=1732047844955"
+		<img src="../IMGS/bground.png"
 			alt="Logo">
 		<div class="text-overlay"><span>Shop Apple Products</span> </div>
 	</div>
@@ -122,17 +122,18 @@
 			.catch(error => console.error('Error al cargar el navbar:', error));
 	</script>
 
-	<!-- swiper-->
 	<div class="image-container2">
 		<img src="https://www.clker.com/cliparts/L/K/l/y/m/V/white-border-white-rectangle-white-page.svg.hi.png"
 			alt="Logo">
 		<div class="subtitle"><span>All Models.</span> Take your pick.</div>
 	</div>
 
+	<!-- swiper-->
 	<div class="container swiper">
 		<div class="card-wrapper">
 			<ul class="card-list2 swiper-wrapper">
-				<li class="card-item2 swiper-slide iphone16pro">
+				<li class="card-item2 swiper-slide iphone16pro" 
+				data-description="The first iPhone designed for Apple Intelligence. Personal, private, powerful.">
 					<a class="a-title"> iPhone 16 Pro &</a>
 					<a class="a-subtitle"> iPhone 16 Pro MAX </a>
 					<a href="#" class="card-link">
@@ -144,7 +145,8 @@
 						<button class="card-btn">Buy</button>
 					</div>
 				</li>
-				<li class="card-item2 swiper-slide iphone16">
+				<li class="card-item2 swiper-slide iphone16"
+				data-description="A18 chip enables Apple Intelligence and console-level gaming with exceptional power efficiency">
 					<a class="a-title"> iPhone 16 &</a>
 					<a class="a-subtitle"> iPhone 16 Plus </a>
 					<a href="#" class="card-link">
@@ -157,7 +159,8 @@
 					</div>
 
 				</li>
-				<li class="card-item2 swiper-slide iphone15">
+				<li class="card-item2 swiper-slide iphone15"
+				data-description="A16 Bionic powers computational photography and smooth gaming performance with great efficiency for all-day battery life">
 					<a class="a-title"> iPhone 15 &</a>
 					<a class="a-subtitle"> iPhone 15 Plus </a>
 					<a href="#" class="card-link">
@@ -165,11 +168,12 @@
 					<img src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-card-40-iphone15hero-202309?wid=680&hei=528&fmt=p-jpg&qlt=95&.v=1693086290559"
 					alt="Logo" class="card-img">
 					<div class="card-footer">
-						<h2 class="card-title"> From $399  or $33.25/mo. for 12 mo.*</h2>
+						<h2 class="card-title"> From $699  or $29.12/mo. for 24 mo.*</h2>
 						<button class="card-btn">Buy</button>
 					</div>
 				</li>
-				<li class="card-item2 swiper-slide iphone14">
+				<li class="card-item2 swiper-slide iphone14"
+				data-description="A15 Bionic, the same superspeedy chip that’s in iPhone 13 Pro">
 					<a class="a-title"> iPhone 14 &</a>
 					<a class="a-subtitle"> iPhone 14 Plus </a>
 					<a href="#" class="card-link">
@@ -177,19 +181,20 @@
 					<img src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-card-40-iphone14-202209?wid=680&hei=528&fmt=p-jpg&qlt=95&.v=1693086290654"
 					alt="Logo" class="card-img">
 					<div class="card-footer">
-						<h2 class="card-title"> From $399  or $33.25/mo. for 12 mo.*</h2>
+						<h2 class="card-title"> From $599  or $33.25/mo. for 24 mo.*</h2>
 						<button class="card-btn">Buy</button>
 					</div>
 				</li>
-				<li class="card-item2 swiper-slide iphoneSE">
-					<a class="a-title"> SE </a>
+				<li class="card-item2 swiper-slide iphoneSE"
+				data-description="5G for fast downloads and high-quality streaming">
+					<a class="a-title"> iPhone SE </a>
 					<a class="a-subtitle">  </a>
 					<a href="#" class="card-link">
 					<img src="" style="margin-top: 35px;">
 					<img src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-card-40-iphonese-202203?wid=680&hei=528&fmt=p-jpg&qlt=95&.v=1646415838921"
 						alt="Logo" class="card-img">
 						<div class="card-footer">
-							<h2 class="card-title"> From $399  or $33.25/mo. for 12 mo.*</h2>
+							<h2 class="card-title"> From $429  or $17.87/mo. for 24 mo.*</h2>
 							<button class="card-btn">Buy</button>
 						</div>
 				</li>
@@ -203,9 +208,10 @@
 		</div>
 	</div>
 
+	<!--second swiper-->
 
 	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-	<script src="../JS/swiper.js"></script>
+	<script src="../JS/swiper_store.js"></script>
 	<script src="../JS/index.js"></script>
 
 	<footer align="center">
