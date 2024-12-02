@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const totalPriceSpan = document.getElementById('total-price');
 
     let selectedProduct = null;
+    let scrollPosition = 0;
 
     // Load cart amount from localStorage
     const savedCartAmount = localStorage.getItem('cartAmount');
@@ -35,11 +36,13 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `).join('');
         cartModal.style.display = 'block';
+        document.body.classList.add('no-scroll'); // Disable scrolling
     });
 
     // Close cart modal
     closeCartModal.addEventListener('click', () => {
         cartModal.style.display = 'none';
+        document.body.classList.remove('no-scroll'); // Enable scrolling
     });
 
     // Confirm purchase
@@ -60,6 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.removeItem('cartAmount');
         cartAmountDiv.textContent = '0';
         cartModal.style.display = 'none';
+        document.body.classList.remove('no-scroll'); // Enable scrolling
     });
 
     // Cancel purchase
@@ -68,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.removeItem('cartAmount');
         cartAmountDiv.textContent = '0';
         cartModal.style.display = 'none';
+        document.body.classList.remove('no-scroll'); // Enable scrolling
     });
 
     // Function to update cart amount in localStorage
@@ -106,15 +111,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const description = card.getAttribute('data-description');
 
             selectedProduct = { name, price, category, description };
-            quantityInput.value = 1; // Reset quantity to 1
+            quantityInput.value = 0; // Reset quantity to 0
             totalPriceSpan.textContent = price.toFixed(2); // Set initial total price
+
+            // Save the current scroll position
+            scrollPosition = window.scrollY;
             quantityModal.style.display = 'block';
+            document.body.classList.add('no-scroll'); // Disable scrolling
         });
     });
 
     // Close quantity modal
     closeQuantityModal.addEventListener('click', () => {
         quantityModal.style.display = 'none';
+        document.body.classList.remove('no-scroll'); // Enable scrolling
+        //window.scrollTo(0, scrollPosition); // Restore scroll position
     });
 
     // Update total price when quantity changes
@@ -134,10 +145,14 @@ document.addEventListener('DOMContentLoaded', () => {
         updateCartAmount(currentCartAmount + quantity);
 
         quantityModal.style.display = 'none';
+        document.body.classList.remove('no-scroll'); // Enable scrolling
+        //window.scrollTo(0, scrollPosition); // Restore scroll position
     });
 
     // Cancel quantity
     cancelQuantityBtn.addEventListener('click', () => {
         quantityModal.style.display = 'none';
+        document.body.classList.remove('no-scroll'); // Enable scrolling
+        //window.scrollTo(0, scrollPosition); // Restore scroll position
     });
 });
