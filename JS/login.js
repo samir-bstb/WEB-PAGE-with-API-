@@ -1,6 +1,6 @@
 const credentials = {
     'admin1@apple.com': '1234',
-    'admin2@apple.com': '12345',
+    'admin2@apple.com': '1234',
     'user1@example.com': 'hola',
     'user2@example.com': 'hola'
 };
