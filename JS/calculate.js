@@ -111,22 +111,20 @@ document.addEventListener('DOMContentLoaded', () => {
             const description = card.getAttribute('data-description');
 
             selectedProduct = { name, price, category, description };
-            quantityInput.value = 0; // Reset quantity to 0
+            quantityInput.value = 1; // Reset quantity to 1
             totalPriceSpan.textContent = price.toFixed(2); // Set initial total price
 
             // Save the current scroll position
             scrollPosition = window.scrollY;
-            quantityModal.style.display = 'block';
+            document.body.style.top = `-${scrollPosition}px`; // Adjust the body's position
             document.body.classList.add('no-scroll'); // Disable scrolling
+            quantityModal.style.display = 'block';
         });
     });
 
     // Close quantity modal
-    closeQuantityModal.addEventListener('click', () => {
-        quantityModal.style.display = 'none';
-        document.body.classList.remove('no-scroll'); // Enable scrolling
-        //window.scrollTo(0, scrollPosition); // Restore scroll position
-    });
+    closeQuantityModal.addEventListener('click', closeAndRestoreScroll);
+    cancelQuantityBtn.addEventListener('click', closeAndRestoreScroll);
 
     // Update total price when quantity changes
     quantityInput.addEventListener('input', () => {
@@ -144,15 +142,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentCartAmount = parseInt(cartAmountDiv.textContent) || 0;
         updateCartAmount(currentCartAmount + quantity);
 
-        quantityModal.style.display = 'none';
-        document.body.classList.remove('no-scroll'); // Enable scrolling
-        //window.scrollTo(0, scrollPosition); // Restore scroll position
+        closeAndRestoreScroll();
     });
 
-    // Cancel quantity
-    cancelQuantityBtn.addEventListener('click', () => {
+    // Function to close the modal and restore scrolling
+    function closeAndRestoreScroll() {
         quantityModal.style.display = 'none';
         document.body.classList.remove('no-scroll'); // Enable scrolling
-        //window.scrollTo(0, scrollPosition); // Restore scroll position
-    });
+        document.body.style.top = ''; // Remove the position adjustment
+        window.scrollTo(0, scrollPosition); // Restore the scroll position
+    }
 });

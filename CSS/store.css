@@ -303,7 +303,7 @@ button#confirm-btn:hover {
 }
 
 .no-scroll {
-    /*position: fixed;*/
+    position: fixed;
     overflow: hidden;
 }
 
