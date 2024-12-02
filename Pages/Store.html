@@ -153,7 +153,7 @@
 							alt="Logo" class="card-img">
 						<div class="card-footer">
 							<h2 class="card-title"> From $999 or $41.62/mo. for 24 mo.*</h2>
-							<button class="card-btn">Buy</button>
+							<button class="card-btn buy-btn">Buy</button>
 						</div>
 				</li>
 				<li class="card-item2 swiper-slide iphone16"
@@ -167,7 +167,7 @@
 							alt="Logo" class="card-img">
 						<div class="card-footer">
 							<h2 class="card-title"> From $799 or $33.29/mo. for 24 mo.*</h2>
-							<button class="card-btn">Buy</button>
+							<button class="card-btn buy-btn">Buy</button>
 						</div>
 
 				</li>
@@ -182,7 +182,7 @@
 							alt="Logo" class="card-img">
 						<div class="card-footer">
 							<h2 class="card-title"> From $699 or $29.12/mo. for 24 mo.*</h2>
-							<button class="card-btn">Buy</button>
+							<button class="card-btn buy-btn">Buy</button>
 						</div>
 				</li>
 				<li class="card-item2 swiper-slide iphone14"
@@ -196,7 +196,7 @@
 							alt="Logo" class="card-img">
 						<div class="card-footer">
 							<h2 class="card-title"> From $599 or $33.25/mo. for 24 mo.*</h2>
-							<button class="card-btn">Buy</button>
+							<button class="card-btn buy-btn">Buy</button>
 						</div>
 				</li>
 				<li class="card-item2 swiper-slide iphoneSE"
@@ -210,7 +210,7 @@
 							alt="Logo" class="card-img">
 						<div class="card-footer">
 							<h2 class="card-title"> From $429 or $17.87/mo. for 24 mo.*</h2>
-							<button class="card-btn">Buy</button>
+							<button class="card-btn buy-btn">Buy</button>
 						</div>
 				</li>
 
@@ -219,6 +219,20 @@
 			<div class="swiper-button-prev"></div>
 			<div class="swiper-button-next"></div>
 
+		</div>
+	</div>
+
+	<div id="modal" class="modal" style="display: none;">
+		<div class="modal-content">
+			<span id="close-modal" class="close">&times;</span>
+			<h3 style ="margin-top: 15px">Calculate Total Price</h3>
+			<label for="quantity">Enter quantity:</label>
+			<input type="number" id="quantity" min="1" value="1">
+			<p>Total Price: $<span id="total-price">999</span></p>
+			<div class="modal-buttons">
+				<button id="cancel-btn">Cancel</button>
+				<button id="confirm-btn">Confirm</button>
+			</div>
 		</div>
 	</div>
 
@@ -390,7 +404,6 @@
 	</div>
 
 	<!--fourth swiper-->
-
 	<div class="container swiper">
 		<div class="card-wrapper">
 			<ul class="card-list2 swiper-wrapper">
@@ -477,6 +490,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 	<script src="../JS/swiper_store.js"></script>
 	<script src="../JS/index.js"></script>
+	<script src="../JS/calculate.js"></script>
 
 	<footer align="center">
 		<p>Designed by Apple in California<br><br>

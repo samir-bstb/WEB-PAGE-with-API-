@@ -1,7 +1,7 @@
 const iphoneCards = document.querySelectorAll(".card-item2");
 
 // Inicializamos un array para guardar los datos
-const iphones = [];
+const products = [];
 
 // Recorremos cada tarjeta para extraer la información
 iphoneCards.forEach(card => {
@@ -12,7 +12,7 @@ iphoneCards.forEach(card => {
     const description = card.getAttribute("data-description"); // Obtenemos la descripción del atributo data-description
 
     // Agregamos el objeto al array
-    iphones.push({
+    products.push({
         name: name,
         price: price,
         category: category,
@@ -21,15 +21,15 @@ iphoneCards.forEach(card => {
 });
 
 // Mostramos los datos en consola
-console.log(iphones);
+console.log(products);
 
 // Generamos un archivo JSON (opcional para descargarlo en el navegador)
-const jsonData = JSON.stringify(iphones, null, 2);
+const jsonData = JSON.stringify(products, null, 2);
 const blob = new Blob([jsonData], { type: "application/json" });
 const url = URL.createObjectURL(blob);
 
 // Creamos un enlace para descargar el archivo
 const link = document.createElement("a");
 link.href = url;
-link.download = "iphones.json";
+link.download = "products.json";
 link.click();

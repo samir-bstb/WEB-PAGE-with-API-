@@ -38,7 +38,7 @@
 
 .text-overlay span {
     font-weight: bold;
-    background: linear-gradient(90deg, rgb(62, 118, 240), rgb(132, 95, 232),  rgb(215, 148, 224), rgb(233, 148, 173), rgb(254, 118, 140));
+    background: linear-gradient(90deg, rgb(62, 118, 240), rgb(62, 118, 240), rgb(132, 95, 232),  rgb(215, 148, 224), rgb(233, 148, 173), rgb(254, 118, 140));
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -56,7 +56,7 @@
 
 .subtitle span {
     font-weight: bold;
-    background: linear-gradient(90deg, rgb(62, 118, 240), rgb(132, 95, 232),  rgb(215, 148, 224), rgb(233, 148, 173), rgb(254, 118, 140));
+    background: linear-gradient(90deg, rgb(62, 118, 240),  rgb(62, 118, 240), rgb(132, 95, 232),  rgb(215, 148, 224), rgb(233, 148, 173), rgb(254, 118, 140));
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -217,4 +217,92 @@
 
 .card-btn:hover {
     background-color: #0056b3;
+}
+
+/*ventana emergente*/
+.modal {
+    position: fixed;
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    width: 300px;
+    height: 250px;
+}
+
+.modal-content {
+    border: none;
+    width: 100%;
+    max-width: 400px; /* Limitar el tamaño máximo interno */
+    text-align: center;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    color: gray;
+}
+
+.modal input {
+    text-align: center;
+    border-radius: 15px;
+    margin-top: 10px;
+    margin-left: 50px;
+    padding: 5px;
+    width: 60%;
+    font-size: 16px;
+}
+
+button#cancel-btn {
+    background-color: #878b8f; /* Color gris para cancelar */
+}
+
+button#cancel-btn:hover {
+    background-color: #5a6268; /* Color gris oscuro al pasar el cursor */
+}
+
+button#confirm-btn {
+    background-color: #007bff; /* Color gris para cancelar */
+}
+
+button#confirm-btn:hover {
+    background-color: #0056b3; /* Color gris oscuro al pasar el cursor */
+}
+
+.modal-buttons button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 15px;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.close {
+    position: absolute;
+    top: -13px; /* Ajusta la posición vertical */
+    right: 8px; /* Ajusta la posición horizontal */
+    font-size: 30px; /* Tamaño de la "X" */
+    color: #333; /* Color de la "X" */
+    font-weight: bold; /* Negrita */
+    cursor: pointer; /* Cambiar el cursor a mano */
+    transition: color 0.3s ease, transform 0.2s ease; /* Animaciones suaves */
+}
+
+.no-scroll {
+    position: fixed;
+    overflow: hidden;
 }
