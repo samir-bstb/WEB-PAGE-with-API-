@@ -79,7 +79,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to add product to cart
     function addProductToCart(product) {
         const products = JSON.parse(localStorage.getItem('cartProducts')) || [];
-        products.push(product);
+        const existingProductIndex = products.findIndex(p => p.name === product.name);
+
+        if (existingProductIndex !== -1) {
+            // Update existing product
+            products[existingProductIndex].quantity += product.quantity;
+            products[existingProductIndex].price += product.price * product.quantity;
+        } else {
+            // Add new product
+            products.push(product);
+        }
+
         localStorage.setItem('cartProducts', JSON.stringify(products));
     }
 
