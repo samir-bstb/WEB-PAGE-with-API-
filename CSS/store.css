@@ -310,8 +310,8 @@ button#confirm-btn:hover {
 /* Cart Modal */
 #cart-modal {
     position: fixed;
-    top: 50%;
-    left: 50%;
+    top: 250px;
+    left: 85%;
     transform: translate(-50%, -50%);
     background: white;
     border-radius: 8px;
@@ -324,7 +324,7 @@ button#confirm-btn:hover {
     align-items: center;
     padding: 20px;
     width: 300px;
-    height: 400px;
+    height: 320px;
 }
 
 #cart-modal .modal-content {
@@ -336,6 +336,15 @@ button#confirm-btn:hover {
     max-height: 300px
 }
 
+#cart-modal h2 {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 1;
+    margin: 0;
+    padding: 10px 0; /* Optional: Add a border to separate header from content */
+}
+
 #cart-modal .close {
     position: absolute;
     top: 10px;
@@ -345,7 +354,17 @@ button#confirm-btn:hover {
     color: gray;
 }
 
+#cart-modal .modal-buttons {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    background: white;/* Optional: Add a border to separate buttons from content */
+    position: sticky;
+    bottom: 0;
+}
+
 #cart-modal .modal-buttons button {
+    margin-top: 10px;
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
@@ -353,7 +372,7 @@ button#confirm-btn:hover {
     border-radius: 15px;
     color: white;
     transition: background-color 0.3s ease;
-    margin: 10px;
+    position: sticky;
 }
 
 #cart-modal #confirm-cart-btn {
