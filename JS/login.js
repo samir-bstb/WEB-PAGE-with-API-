@@ -12,6 +12,9 @@ function login() {
     const password = passwordField.value;
 
     if (credentials[email] && credentials[email] === password) {
+        // Almacenar estado de autenticación en localStorage
+        localStorage.setItem('isLoggedIn', 'true');
+
         if (email.endsWith('@apple.com')) {
             alert('Welcome, Admin!');
             window.location.href = 'admin.html'; // Redirect to admin page
