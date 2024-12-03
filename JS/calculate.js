@@ -27,14 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     shoppingIcon.addEventListener('click', (event) => {
         event.preventDefault(); // Prevent default action
         const products = JSON.parse(localStorage.getItem('cartProducts')) || [];
-        cartDetails.innerHTML = products.map(product => `
-            <div class="cart-item">
-                <p>Name: ${product.name}</p>
-                <p>Price: $${product.price}</p>
-                <p>Quantity: ${product.quantity}</p>
-                <p>Category: ${product.category}</p>
-            </div>
-        `).join('');
+        renderCartDetails(products);
         cartModal.style.display = 'block';
         document.body.classList.add('no-scroll'); // Disable scrolling
     });
@@ -98,6 +91,45 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('cartProducts', JSON.stringify(products));
     }
 
+    // Function to render cart details
+    function renderCartDetails(products) {
+        cartDetails.innerHTML = products.map((product, index) => `
+            <div class="cart-item" data-index="${index}">
+                <p>Name: ${product.name} <span class="remove-product" data-index="${index}">&times;</span></p>
+                <p>Price: $${product.price}</p>
+                <p>Quantity: ${product.quantity}</p>
+                <p>Category: ${product.category}</p>
+            </div>
+        `).join('');
+
+        // Add event listeners to remove buttons
+        document.querySelectorAll('.remove-product').forEach(button => {
+            button.addEventListener('click', (event) => {
+                const index = event.target.getAttribute('data-index');
+                removeProductFromCart(index);
+            });
+        });
+    }
+
+    // Function to remove product from cart
+    function removeProductFromCart(index) {
+        const products = JSON.parse(localStorage.getItem('cartProducts')) || [];
+        const product = products[index];
+        const currentCartAmount = parseInt(cartAmountDiv.textContent) || 0;
+
+        // Update cart amount
+        updateCartAmount(currentCartAmount - product.quantity);
+
+        // Remove product from array
+        products.splice(index, 1);
+
+        // Update localStorage
+        localStorage.setItem('cartProducts', JSON.stringify(products));
+
+        // Re-render cart details
+        renderCartDetails(products);
+    }
+
     // Show quantity modal when buy button is clicked
     document.querySelectorAll('.buy-btn').forEach(button => {
         button.addEventListener('click', (event) => {
@@ -111,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const description = card.getAttribute('data-description');
 
             selectedProduct = { name, price, category, description };
-            quantityInput.value = 1; // Reset quantity to 1
+            quantityInput.value = 0; // Reset quantity to 1
             totalPriceSpan.textContent = price.toFixed(2); // Set initial total price
 
             // Save the current scroll position

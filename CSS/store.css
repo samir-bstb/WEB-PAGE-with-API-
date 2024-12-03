@@ -323,7 +323,7 @@ button#confirm-btn:hover {
     justify-content: center;
     align-items: center;
     padding: 20px;
-    width: 300px;
+    width: 330px;
     height: 320px;
 }
 
@@ -390,4 +390,18 @@ button#confirm-btn:hover {
 
 #cart-modal #cancel-cart-btn:hover {
     background-color: #5a6268;
+}
+
+
+.cart-item {
+    position: relative;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.cart-item .remove-product {
+    cursor: pointer;
+    color: red;
+    font-size: 18px;
+    margin-left: 10px;
 }
