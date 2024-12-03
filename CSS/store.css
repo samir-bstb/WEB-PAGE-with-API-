@@ -310,7 +310,7 @@ button#confirm-btn:hover {
 /* Cart Modal */
 #cart-modal {
     position: fixed;
-    top: 250px;
+    top: 215px;
     left: 85%;
     transform: translate(-50%, -50%);
     background: white;
