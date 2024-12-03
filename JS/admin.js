@@ -39,9 +39,8 @@ async function fetchProducts() {
                         <td>${product.description}</td>
                         <td><img src="${product.img}" alt="Imagen" width="50"></td>
                         <td>
-                            <button class="btn btn-warning btn-sm" onclick="editProduct(${product.id})">Editar</button>
-                            
-                            <button class="btn btn-danger btn-sm" onclick="deleteProduct(${product.id})">Eliminar</button>
+                            <button class="btn btn-warning btn-sm" onclick="editProduct(${product.id})">Edit</button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteProduct(${product.id})" style="margin-top: 10px;">Delete</button>
                         </td>
                     </tr>
                 `;
@@ -64,36 +63,68 @@ async function createProduct(event) {
         description: document.getElementById("productDescription").value,
         img: document.getElementById("productImage").value
     };
-    await fetch(`${apiUrl}/products`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(product)
-    });
-    document.getElementById("createProductForm").reset();
-    alert("Producto creado exitosamente.");
+
+    try {
+        const response = await fetch(`${apiUrl}/products`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(product)
+        });
+
+        if (!response.ok) {
+            throw new Error("Error al crear el producto");
+        }
+
+        document.getElementById("createProductForm").reset();
+        alert("Producto creado exitosamente.");
+        fetchProducts(); // Refrescar la lista
+    } catch (error) {
+        console.error("Error al crear el producto: ", error);
+        alert("Ocurrió un error al crear el producto.");
+    }
 }
 
 // Función para eliminar un producto
 async function deleteProduct(productId) {
-    if (confirm("¿Estás seguro de eliminar este producto?")) {
-        await fetch(`${apiUrl}/products/${productId}`, { method: "DELETE" });
-        fetchProducts(); // Refrescar la lista
+    try {
+        if (confirm("¿Estás seguro de eliminar este producto?")) {
+            const response = await fetch(`${apiUrl}/products/${productId}`, { method: "DELETE" });
+
+            if (!response.ok) {
+                throw new Error("Error al eliminar el producto");
+            }
+
+            fetchProducts(); // Refrescar la lista
+        }
+    } catch (error) {
+        console.error("Error al eliminar el producto: ", error);
+        alert("Ocurrió un error al eliminar el producto.");
     }
 }
 
 // Función para editar un producto
 async function editProduct(productId) {
-    const response = await fetch(`${apiUrl}/products/${productId}`);
-    const product = await response.json();
+    try {
+        const response = await fetch(`${apiUrl}/products/${productId}`);
 
-    document.getElementById("productId").value = product.id;
-    document.getElementById("productNameUpdate").value = product.name;
-    document.getElementById("productPriceUpdate").value = product.price;
-    document.getElementById("productCategoryUpdate").value = product.category;
-    document.getElementById("productDescriptionUpdate").value = product.description;
-    document.getElementById("productImageUpdate").value = product.img;
+        if (!response.ok) {
+            throw new Error("Error al obtener el producto");
+        }
 
-    showSection("update"); // Mostrar la sección de actualizar
+        const product = await response.json();
+
+        document.getElementById("productId").value = product.id;
+        document.getElementById("productNameUpdate").value = product.name;
+        document.getElementById("productPriceUpdate").value = product.price;
+        document.getElementById("productCategoryUpdate").value = product.category;
+        document.getElementById("productDescriptionUpdate").value = product.description;
+        document.getElementById("productImageUpdate").value = product.img;
+
+        showSection("update"); // Mostrar la sección de actualizar
+    } catch (error) {
+        console.error("Error al editar el producto: ", error);
+        alert("Ocurrió un error al editar el producto.");
+    }
 }
 
 // Función para actualizar un producto
@@ -119,7 +150,6 @@ async function updateProduct(event) {
     };
 
     try {
-        // Enviar la solicitud PUT con el ID y los datos actualizados
         const response = await fetch(`${apiUrl}/products/${productId}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
@@ -149,4 +179,6 @@ document.getElementById("deleteProductForm").addEventListener("submit", (e) => {
 document.getElementById("updateProductForm").addEventListener("submit", updateProduct);
 
 // Iniciar mostrando la sección de "Leer Productos"
-showSection("create");
+showSection("read");
+
+
