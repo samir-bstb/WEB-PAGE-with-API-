@@ -350,8 +350,9 @@ button#confirm-btn:hover {
     top: 10px;
     right: 10px;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 21px;
     color: gray;
+    z-index: 3;
 }
 
 #cart-modal .modal-buttons {

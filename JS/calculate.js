@@ -153,4 +153,3 @@ document.addEventListener('DOMContentLoaded', () => {
         window.scrollTo(0, scrollPosition); // Restore the scroll position
     }
 });
-
