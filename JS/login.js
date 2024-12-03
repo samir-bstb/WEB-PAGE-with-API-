@@ -17,7 +17,7 @@ function login() {
             window.location.href = 'admin.html'; // Redirect to admin page
         } else {
             alert('Login successful!');
-            window.location.href = 'cart.html'; // Redirect to cart
+            window.location.href = 'shopping.html'; // Redirect to cart
         }
     } else {
         alert('Invalid email or password. Please try again.');
