@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Consulta de Husos Horarios</title>
+    <link rel="stylesheet" href="../CSS/time.css">
+</head>
+<body>
+    <h1 style="text-align: center;">Consulta de Husos Horarios</h1>
+    <div style="text-align: center; margin-bottom: 20px;">
+        <label for="timezone">Escribe una zona horaria (ej: Europe/London): </label>
+        <input type="text" id="timezone" placeholder="America/New_York">
+        <button onclick="fetchTimezone()">Consultar</button>
+    </div>
+    <div id="result" style="text-align: center; font-family: Arial, sans-serif;">
+    </div>
+
+    <!-- Cargar Axios desde un CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.7.8/dist/axios.min.js"></script>
+
+    <script src="../JS/timezones.js"></script>
+</body>
+</html>

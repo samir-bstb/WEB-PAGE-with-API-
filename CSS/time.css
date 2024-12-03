@@ -1,0 +1,21 @@
+body {
+    font-family: 'Arial', sans-serif;
+    font-style: italic; /* Fuente cursiva */
+}
+#timezone {
+    border-radius: 8px; /* Borde redondeado */
+    padding: 5px;
+    font-size: 16px;
+}
+button {
+    border-radius: 8px; /* Borde redondeado */
+    background-color: blue; /* Color azul */
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+button:hover {
+    background-color: darkblue; /* Color azul oscuro al pasar el ratón */
+}
