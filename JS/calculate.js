@@ -1,4 +1,9 @@
+let isScriptExecuted = false;
+
 document.addEventListener('DOMContentLoaded', () => {
+    if (isScriptExecuted) return; // Si ya se ejecutó el script, no hacer nada
+    isScriptExecuted = true; // Marca el script como ejecutado
+
     const cartModal = document.getElementById('cart-modal');
     const closeCartModal = document.getElementById('close-cart-modal');
     const confirmCartBtn = document.getElementById('confirm-cart-btn');
@@ -40,18 +45,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Confirm purchase
     confirmCartBtn.addEventListener('click', () => {
-        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        const products = JSON.parse(localStorage.getItem('cartProducts')) || [];
 
-        if (!isLoggedIn) {
-            // Redirect to login if not logged in
-            alert('You need to log in to confirm your purchase.');
-            window.location.href = 'login.html'; // Replace with the path to your login page
-            return; // Exit function
-        }
-
-        // If logged in, proceed with purchase confirmation
-        alert('Purchase confirmed!'); // Purchase confirmation logic
-        localStorage.removeItem('cartProducts'); // Clear cart
+        // Clear cart
+        localStorage.removeItem('cartProducts');
         localStorage.removeItem('cartAmount');
         cartAmountDiv.textContent = '0';
         cartModal.style.display = 'none';
@@ -75,18 +72,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to add product to cart
     function addProductToCart(product) {
-        const quantity = product.quantity / 2; // Divide quantity by 2
+        const quantity = product.quantity; // Dividir la cantidad entre 2
         console.log(`Cantidad del producto (dividida entre 2): ${quantity}`);
 
         const products = JSON.parse(localStorage.getItem('cartProducts')) || [];
         const existingProductIndex = products.findIndex(p => p.name === product.name);
 
         if (existingProductIndex !== -1) {
-            // Update existing product
+            // Actualizar el producto existente
             products[existingProductIndex].quantity += quantity;
-            products[existingProductIndex].price = product.price; // Ensure price per unit is updated correctly
+            products[existingProductIndex].price = product.price; // Asegúrate de que el precio por unidad se actualice correctamente
         } else {
-            // Add a new product
+            // Agregar un nuevo producto
             products.push({ ...product, quantity });
         }
 
@@ -145,8 +142,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const description = card.getAttribute('data-description');
 
             selectedProduct = { name, price, category, description };
-            quantityInput.value = 1; // Reset quantity to 1
-            totalPriceSpan.textContent = price.toFixed(2); // Set initial total price
+            quantityInput.value = 1; // Restablecer la cantidad a 1
+            totalPriceSpan.textContent = price.toFixed(2); // Establecer el precio total inicial
 
             // Save the current scroll position
             scrollPosition = window.scrollY;
@@ -174,10 +171,28 @@ document.addEventListener('DOMContentLoaded', () => {
         addProductToCart(product);
 
         const currentCartAmount = parseInt(cartAmountDiv.textContent) || 0;
-        updateCartAmount(currentCartAmount + quantity); // Divide quantity by 2
+        updateCartAmount(currentCartAmount + quantity); // Dividir la cantidad entre 2
 
         closeAndRestoreScroll();
     });
+
+    const confirmBtn = document.getElementById('confirm-cart-btn');
+
+    confirmBtn.addEventListener('click', () => {
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+        if (!isLoggedIn) {
+            // Redirigir al inicio de sesión si no está logeado
+            alert('You need to log in to confirm your purchase.');
+            window.location.href = 'login.html'; // Cambia esto por la ruta correcta de tu página de inicio de sesión
+            return; // Salir de la función
+        }
+
+        // Si está logeado, proceder con la confirmación
+        alert('Purchase confirmed!'); // Aquí se realiza la lógica de compra
+        closeAndRestoreScroll(); // Cerrar el modal y restaurar el scroll
+    });
+
 
     // Function to close the modal and restore scrolling
     function closeAndRestoreScroll() {
