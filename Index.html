@@ -18,6 +18,8 @@
 		crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" />
 	<link rel="stylesheet" href="../CSS/index.css">
+	<script src="../JS/index.js"></script>
+	<script src="../JS/calculate.js"></script>
 </head>
 
 <body>
@@ -102,7 +104,7 @@
 			.then(html => {
 				// Insertar el HTML del navbar
 				document.getElementById('navbar-container').innerHTML = html;
-
+	
 				// Re-inicializar Bootstrap para la navbar
 				const navbar = document.querySelector('#navbarNavDropdown');
 				if (navbar) {
@@ -111,29 +113,29 @@
 						new bootstrap.Dropdown(dropdown); // Re-inicializar dropdowns
 					});
 				}
-
+	
 				// Re-inicializar eventos personalizados si los tienes
 				const overlay = document.getElementById('overlay'); // Fondo oscuro
-
+	
 				function showMenu(infoElement) {
 					closeAllMenus();
 					infoElement.classList.add('visible');
 					overlay.style.display = 'block';
 				}
-
+	
 				function hideMenu(infoElement) {
 					infoElement.classList.remove('visible');
 					if (!document.querySelector('.menu-info.visible')) {
 						overlay.style.display = 'none';
 					}
 				}
-
+	
 				function closeAllMenus() {
 					const allMenus = document.querySelectorAll('.menu-info');
 					allMenus.forEach(menu => menu.classList.remove('visible'));
 					overlay.style.display = 'none';
 				}
-
+	
 				function setupLink(linkId, infoId) {
 					const link = document.getElementById(linkId);
 					const info = document.getElementById(infoId);
@@ -148,9 +150,13 @@
 				setupLink('iphone-link', 'iphone-info');
 				setupLink('watch-link', 'watch-info');
 				setupLink('support-link', 'support-info');
+	
+				// Re-inicializar eventos de los botones de compra y el carrito
+				const script = document.createElement('script');
+				script.src = '../JS/calculate.js';
+				document.body.appendChild(script);
 			})
 			.catch(error => console.error('Error al cargar el navbar:', error));
-
 	</script>
 
 	<!-- Swiper -->
