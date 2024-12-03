@@ -76,16 +76,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to add product to cart
     function addProductToCart(product) {
+        const quantity = product.quantity / 2; // Dividir la cantidad entre 2
+        console.log(`Cantidad del producto (dividida entre 2): ${quantity}`);
+
         const products = JSON.parse(localStorage.getItem('cartProducts')) || [];
         const existingProductIndex = products.findIndex(p => p.name === product.name);
 
         if (existingProductIndex !== -1) {
-            // Update existing product
-            products[existingProductIndex].quantity += product.quantity;
-            products[existingProductIndex].price += product.price * product.quantity;
+            // Actualizar el producto existente
+            products[existingProductIndex].quantity += quantity;
+            products[existingProductIndex].price = product.price; // Asegúrate de que el precio por unidad se actualice correctamente
         } else {
-            // Add new product
-            products.push(product);
+            // Agregar un nuevo producto
+            products.push({ ...product, quantity });
         }
 
         localStorage.setItem('cartProducts', JSON.stringify(products));
@@ -143,8 +146,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const description = card.getAttribute('data-description');
 
             selectedProduct = { name, price, category, description };
-            quantityInput.value = 0; // Reset quantity to 1
-            totalPriceSpan.textContent = price.toFixed(2); // Set initial total price
+            quantityInput.value = 1; // Restablecer la cantidad a 1
+            totalPriceSpan.textContent = price.toFixed(2); // Establecer el precio total inicial
 
             // Save the current scroll position
             scrollPosition = window.scrollY;
@@ -172,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
         addProductToCart(product);
 
         const currentCartAmount = parseInt(cartAmountDiv.textContent) || 0;
-        updateCartAmount(currentCartAmount + quantity);
+        updateCartAmount(currentCartAmount + quantity); // Dividir la cantidad entre 2
 
         closeAndRestoreScroll();
     });
