@@ -1,0 +1,31 @@
+body {
+    font-family: 'Arial', sans-serif;
+    font-style: italic; /* Fuente cursiva */
+    background-image: url('https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?cs=srgb&dl=pexels-veeterzy-39811.jpg&fm=jpg'); /* Ruta a tu imagen de fondo */
+    background-size: cover; /* Asegura que la imagen cubra toda la pantalla */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-position: center center; /* Centra la imagen en la pantalla */
+    margin: 0; /* Elimina el margen por defecto del body */
+    height: 100vh;
+}
+#timezone {
+    border-radius: 8px; /* Borde redondeado */
+    padding: 5px;
+    font-size: 16px;
+    padding: 10px;
+}
+button {
+    border-radius: 10px; /* Borde redondeado */
+    background-color: rgb(249, 249, 153); /* Color azul */
+    color: black;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    height:30px;
+    
+    justify-content: center; /* Centra el texto horizontalmente */
+    align-items: center;
+}
+button:hover {
+    background-color: rgb(238, 219, 11); /* Color azul oscuro al pasar el ratón */
+}

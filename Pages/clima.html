@@ -4,11 +4,12 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Consulta del Clima</title>
+        <link rel="stylesheet" href="../CSS/clima.css">
     </head>
     <body>
         <h1 style="text-align: center;">Consulta del Clima</h1>
         <div style="text-align: center; margin-bottom: 20px;">
-            <label for="city">Ingresa el nombre de una ciudad: </label>
+            <label for="city" style="color:white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">Ingresa el nombre de una ciudad: </label>
             <input type="text" id="city" placeholder="Ej: Madrid, Tokyo, etc.">
             <button onclick="fetchWeather()">Consultar Clima</button>
         </div>
@@ -20,6 +21,6 @@
         <script src="https://cdn.jsdelivr.net/npm/axios@1.7.8/dist/axios.min.js"></script>
 
         <!-- Archivo de lógica -->
-        <script src="weather.js"></script>
+        <script src="../JS/clima.js"></script>
     </body>
 </html>
