@@ -94,53 +94,67 @@
 	</div>
 
     <script>
-        // Cargar navbar
-        fetch('../navbar.html')
-            .then(response => response.text())
-            .then(html => {
-                // Insertar el HTML del navbar
-                document.getElementById('navbar-container').innerHTML = html;
+		// Cargar navbar
+		fetch('../navbar.html')
+			.then(response => response.text())
+			.then(html => {
+				// Insertar el HTML del navbar
+				document.getElementById('navbar-container').innerHTML = html;
+	
+				// Re-inicializar Bootstrap para la navbar
+				const navbar = document.querySelector('#navbarNavDropdown');
+				if (navbar) {
+					const dropdowns = navbar.querySelectorAll('.dropdown-toggle');
+					dropdowns.forEach(dropdown => {
+						new bootstrap.Dropdown(dropdown); // Re-inicializar dropdowns
+					});
+				}
+	
+				// Re-inicializar eventos personalizados si los tienes
+				const overlay = document.getElementById('overlay'); // Fondo oscuro
+	
+				function showMenu(infoElement) {
+					closeAllMenus();
+					infoElement.classList.add('visible');
+					overlay.style.display = 'block';
+				}
+	
+				function hideMenu(infoElement) {
+					infoElement.classList.remove('visible');
+					if (!document.querySelector('.menu-info.visible')) {
+						overlay.style.display = 'none';
+					}
+				}
+	
+				function closeAllMenus() {
+					const allMenus = document.querySelectorAll('.menu-info');
+					allMenus.forEach(menu => menu.classList.remove('visible'));
+					overlay.style.display = 'none';
+				}
+	
+				function setupLink(linkId, infoId) {
+					const link = document.getElementById(linkId);
+					const info = document.getElementById(infoId);
+					if (link && info) {
+						link.addEventListener('mouseenter', () => showMenu(info));
+						info.addEventListener('mouseleave', () => hideMenu(info));
+					}
+				}
+				setupLink('store-link', 'store-info');
+				setupLink('mac-link', 'mac-info');
+				setupLink('ipad-link', 'ipad-info');
+				setupLink('iphone-link', 'iphone-info');
+				setupLink('watch-link', 'watch-info');
+				setupLink('support-link', 'support-info');
+	
+				// Re-inicializar eventos de los botones de compra y el carrito
+				const script = document.createElement('script');
+				script.src = '../JS/calculate.js';
+				document.body.appendChild(script);
+			})
+			.catch(error => console.error('Error al cargar el navbar:', error));
+	</script>
 
-                // Re-inicializar los eventos del navbar
-                const overlay = document.getElementById('overlay'); // Fondo oscuro
-
-                function showMenu(infoElement) {
-                    closeAllMenus();
-                    infoElement.classList.add('visible');
-                    overlay.style.display = 'block';
-                }
-
-                function hideMenu(infoElement) {
-                    infoElement.classList.remove('visible');
-                    if (!document.querySelector('.menu-info.visible')) {
-                        overlay.style.display = 'none';
-                    }
-                }
-
-                function closeAllMenus() {
-                    const allMenus = document.querySelectorAll('.menu-info');
-                    allMenus.forEach(menu => menu.classList.remove('visible'));
-                    overlay.style.display = 'none';
-                }
-
-                function setupLink(linkId, infoId) {
-                    const link = document.getElementById(linkId);
-                    const info = document.getElementById(infoId);
-                    if (link && info) {
-                        link.addEventListener('mouseenter', () => showMenu(info));
-                        info.addEventListener('mouseleave', () => hideMenu(info));
-                    }
-                }
-
-                setupLink('store-link', 'store-info');
-                setupLink('mac-link', 'mac-info');
-                setupLink('ipad-link', 'ipad-info');
-                setupLink('iphone-link', 'iphone-info');
-                setupLink('watch-link', 'watch-info');
-                setupLink('support-link', 'support-info');
-            })
-            .catch(error => console.error('Error al cargar el navbar:', error));
-    </script>
 
     <div class="container mt-5">
         <h1 class="text-center">About Us</h1>
